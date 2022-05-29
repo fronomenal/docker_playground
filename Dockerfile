@@ -1,15 +1,15 @@
 FROM node:alpine
 
-WORKDIR /usr/mydbapp
+WORKDIR /usr/dockerapp
 
-COPY package*.json /usr/apps/sqlodeDB/
+COPY package*.json ./
 
 RUN npm install
 
-COPY . /usr/apps/sqlodeDB/
+COPY . .
 
 ENV PORT=9090 DB_HOST=backend DB_USER=root DB_PASS=toor DB=test_db
 
 EXPOSE 9090
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "app"]

@@ -1,9 +1,10 @@
 {
-  "name": "cloud9",
-  "version": "1.0.0",
+  "name": "sqlodedb",
+  "version": "1.0.1",
   "description": "",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
+    "app": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

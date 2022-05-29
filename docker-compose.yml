@@ -1,8 +1,10 @@
 services:
   api:
     build: .
+    depends_on:
+      - backend
     ports:
-      - 9090:9090
+      - 8080:9090
   backend:
     image: mysql
     restart: always
@@ -14,7 +16,7 @@ services:
       expose:
         3306
     volumes:
-      -db-data:/dbs/mysql
+      -db-data:/var/lib/mysql
 
 volumes:
   db-data:
