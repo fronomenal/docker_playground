@@ -4,7 +4,7 @@ services:
     depends_on:
       - backend
     ports:
-      - 8080:9090
+      - "8080:9090"
   backend:
     image: mysql
     restart: always
@@ -12,7 +12,7 @@ services:
       MYSQL_ROOT_PASSWORD: toor
       MYSQL_DATABASE: monsters
       ports:
-      - 3307:3306
+        - "3307:3306"
       expose:
         3306
     volumes:
