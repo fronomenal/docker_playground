@@ -11,9 +11,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: toor
       MYSQL_DATABASE: monsters
-      ports:
-        - "3307:3306"
-      expose:
+    ports:
+      - "3307:3306"
+    expose:
         3306
     volumes:
       -db-data:/var/lib/mysql
