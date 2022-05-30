@@ -10,7 +10,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: toor
-      MYSQL_DATABASE: test_db
+      MYSQL_DATABASE: monsters
       ports:
       - 3307:3306
       expose:

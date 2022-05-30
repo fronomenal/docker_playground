@@ -1,9 +1,10 @@
 const mysql = require("mysql2");
 
 const conn = mysql.createConnection({
-    host : 'localhost',
+    host : process.env.DB_HOST || 'localhost',
     user : 'root',
-    database : 'shoppers' 
+    password : (process.env.DB_PASS)? process.env.DB_PASS : '',
+    database : process.env.DB || 'shoppers' 
 });
 conn.connect((err) => {
     if (err) {

@@ -1,19 +1,21 @@
-const app = require("express")();
-const db = require("./db");
-const faker = require("faker");
+const express = require("express");
+const routes = require("./routes");
 
-const randName = faker.name.findName();
-const randEmail = faker.internet.email();
+const app = express();
 
-const PORT = process.env.PORT || 9090;
-
-app.get("/", (req, res)=>{
-    db.query("SELECT * FROM shoppers.customers;", (err, rez)=>{
-        if (err) throw err;
-        res.json(rez);
-    });
+app.use(express.json());
+app.use((err, req, res, next)=>{
+    res.status(400).json({msg: `Invalid JSON body: ${err.message}`, status: 400});
 });
 
-app.listen(PORT, ()=>{
-    console.log(`listening on port : ${PORT}`)
+app.use('/', routes);
+
+app.use((err, req, res, next) => {
+    res.status(400).json(err);
 })
+
+app.all('*', (req, res) => {
+    res.status(404).json({err: "Invalid route", status: 404})
+});
+
+module.exports = app;
