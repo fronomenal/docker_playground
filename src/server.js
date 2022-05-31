@@ -15,7 +15,7 @@ app.use((err, req, res, next)=>{
 app.use('/', routes);
 
 app.use((err, req, res, next) => {
-    res.status(400).json(err);
+    res.status(400).json(err.message);
 })
 
 app.all('*', (req, res) => {
