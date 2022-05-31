@@ -1,16 +1,17 @@
-CREATE TABLE monsters(
+const seeder =
+`CREATE TABLE habitats(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(50),
+	climate VARCHAR(50),
+	temperature int
+);
+
+CREATE TABLE creatures(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	name VARCHAR(50),
 	personality VARCHAR(50),
 	home INT,
 	FOREIGN KEY (home) REFERENCES habitats(id)
-);
-
-CREATE TABLE habitats(
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	name VARCHAR(50),
-	climate VARCHAR(50),
-	temperature int
 );
 
 INSERT INTO habitats(name, climate, temperature)
@@ -19,8 +20,10 @@ VALUES
 ('forest','haunted',70),
 ('mountain','icy',30);
 
-INSERT INTO monsters(name, personality, home)
+INSERT INTO creatures(name, personality, home)
 VALUES
 ('Fluffy','aggressive', 1),
 ('Noodles','impatient', 2),
-('Rusty','passionate', 3);
+('Rusty','passionate', 3);`
+
+module.exports = seeder;
