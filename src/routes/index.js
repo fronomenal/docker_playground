@@ -1,11 +1,9 @@
-const router = require("express").Router();
-const db = require("../db");
+const app = require("../server");
 
-router.get("/", (req, res)=>{
-    db.query("SELECT CURDATE();", (err, rez)=>{
-        if (err) throw err;
-        res.json(rez);
-    });
-});
+const seed = require("./seed");
+const monsters = require("./monsters");
+
+app.use("/seed", seed);
+app.use("/monsters", monsters);
 
 module.exports = router;

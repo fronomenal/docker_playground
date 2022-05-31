@@ -5,6 +5,8 @@ services:
       - backend
     ports:
       - "8080:9090"
+    volumes:
+      - ./src:/usr/dockerapp/src
   backend:
     image: mysql
     restart: always

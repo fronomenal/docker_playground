@@ -12,4 +12,4 @@ ENV PORT=9090 DB_HOST=backend DB_USER=root DB_PASS=toor DB=monsters
 
 EXPOSE 9090
 
-CMD ["npm", "run", "app"]
+CMD ["npm", "run", "dev"]

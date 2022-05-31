@@ -7,6 +7,8 @@ const conn = mysql.createConnection({
     database : process.env.DB || 'shoppers' 
 });
 
+conn.config.namedPlaceholders = true;
+
 let poller = setInterval(poll, 3000);
 let flag = true;
 poll(poller);
