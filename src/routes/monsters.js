@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const db = require('../db');
 
-router.get('/', (request, response, next) => {
-    db.query('SELECT * FROM creatures ORDER BY id;', (err, rez) => {
+router.route("/")
+.get((request, response, next) => {
+    db.query("SELECT * FROM creatures ORDER BY id;", (err, rez) => {
         if (err) return next(err);
         response.json(rez);
     });
@@ -14,17 +15,18 @@ router.get('/', (request, response, next) => {
     if (!personality) res.status(400).json({msg: "Provide personality field", status: 400});
     if (!home) res.status(400).json({msg: "Provide home field", status: 400});
 
-    db.query('INSERT INTO creatures(name, personality) VALUES (?,?);',[name, personality],
+    db.query("INSERT INTO creatures(name, personality) VALUES (?,?);",[name, personality],
     (err) => {
         if (err) return next(err);
 
-        response.redirect('/creatures');
+        response.redirect("/creatures");
     });
 });
 
-router.get('/:id', (request, response, next) => {
+router.route("/:id")
+.get((request, response, next) => {
     const {id} = request.params;
-    db.query('SELECT * FROM creatures WHERE id=?;',[id], (err, rez) => {
+    db.query("SELECT * FROM creatures WHERE id=?;",[id], (err, rez) => {
         if (err) return next(err);
         response.json(rez);
     });
@@ -71,13 +73,13 @@ router.get('/:id', (request, response, next) => {
 
 });
 
-router.delete('\id', (request, response, next) => {
+router.delete("\id", (request, response, next) => {
     const {id} = request.params;
 
-    db.query('DELETE FROM creatures WHERE id=?;', [id], (err) => {
+    db.query("DELETE FROM creatures WHERE id=?;", [id], (err) => {
         if (err) return next(err);
 
-        response.redirect('/creatures');
+        response.redirect("/creatures");
     })
 })
 
