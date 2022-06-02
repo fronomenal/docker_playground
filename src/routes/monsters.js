@@ -73,7 +73,7 @@ router.route("/:id")
 
 });
 
-router.delete("\id", (request, response, next) => {
+router.delete("\:id", (request, response, next) => {
     const {id} = request.params;
 
     db.query("DELETE FROM creatures WHERE id=?;", [id], (err) => {
