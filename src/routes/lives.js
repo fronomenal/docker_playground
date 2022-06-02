@@ -6,14 +6,14 @@ const db = require('../db');
 router.get("/:id", (request, response, next) => {
     const {id} = req.params;
 
-    db.query("SELECT creatures.id, creatures.name AS creature, habitats.name AS home FROM creatures JOIN habitats ON creatures.home = habitats.id WHERE creatures.id = ?;", [id], (err, rez) =>{
+    db.query("SELECT creatures.name AS monster, habitats.name AS home FROM creatures JOIN habitats ON creatures.home = habitats.id WHERE creatures.id = ?;", [id], (err, rez) =>{
         if (err) return next(err);
 
         response.json(rez);
     });
 });
 router.get("/", (request, response, next) => {
-    db.query('SELECT * FROM creatures, habitats WHERE creatures.home = habitats.id;', (err, rez) => {
+    db.query('SELECT creatures.name AS monster, habitats.name AS home FROM creatures, habitats WHERE creatures.home = habitats.id;', (err, rez) => {
         if (err) return next(err);
 
         response.json(rez);

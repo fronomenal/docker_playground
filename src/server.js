@@ -6,6 +6,8 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const routes = require("./routes");
 
 const app = express();
+
+const PORT = process.env.PORT || 9090;
 const options = {
     definition: {
         openapi: "3.0.0",
@@ -14,9 +16,9 @@ const options = {
             version: "1.3.0",
             description: "Serves monsters and their habitats"
         },
-        servers: [{url: "http://localhost:9090"}]
+        servers: [{url: `http://localhost:${PORT}`}]
     },
-    apis: ["./routes/monsters", "./routes/habitats", "./routes/lives"]
+    apis: [`${__dirname}/docs/*.js`]
 }
 const specs = swaggerJsDoc(options)
 

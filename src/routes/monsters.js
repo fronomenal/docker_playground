@@ -3,23 +3,23 @@ const db = require('../db');
 
 router.route("/")
 .get((request, response, next) => {
-    db.query("SELECT * FROM creatures ORDER BY id;", (err, rez) => {
+    db.query("SELECT name, personality FROM creatures ORDER BY id;", (err, rez) => {
         if (err) return next(err);
         response.json(rez);
     });
 }).post((request, response, next) => {
     const { name, personality, home } = request.body;
 
-    if (!name && !personality && !home) res.status(400).json({msg: "Provide the name, personality and home fields", status: 400});
-    if (!name) res.status(400).json({msg: "Provide name field", status: 400});
-    if (!personality) res.status(400).json({msg: "Provide personality field", status: 400});
-    if (!home) res.status(400).json({msg: "Provide home field", status: 400});
+    if (!name && !personality && !home) response.status(400).json({msg: "Provide the name, personality and home fields", status: 400});
+    if (!name) response.status(400).json({msg: "Provide name field", status: 400});
+    if (!personality) response.status(400).json({msg: "Provide personality field", status: 400});
+    if (!home) response.status(400).json({msg: "Provide home field", status: 400});
 
     db.query("INSERT INTO creatures(name, personality) VALUES (?,?);",[name, personality],
     (err) => {
         if (err) return next(err);
 
-        response.redirect("/creatures");
+        response.status(201).json({msg: `succesfully created monster with id: ${id}`, status: 201});
     });
 });
 
@@ -30,7 +30,7 @@ router.route("/:id")
         if (err) return next(err);
         response.json(rez);
     });
-}).put((request, response, next) => {
+}).patch((request, response, next) => {
     const {id} = request.params;
 
     //elements must be declared in order for pattern matching to work
@@ -68,7 +68,7 @@ router.route("/:id")
     db.query(strQuery, args, (err) => {
         if (err) return next(err);
     
-        response.redirect('/creatures')
+        response.status(200).json({msg: `succesfully modified monster with id: ${id}`, status: 200});
     });
 
 });
@@ -79,9 +79,8 @@ router.delete("\id", (request, response, next) => {
     db.query("DELETE FROM creatures WHERE id=?;", [id], (err) => {
         if (err) return next(err);
 
-        response.redirect("/creatures");
+        response.status(204).json({msg: `succesfully removed monster with id: ${id}`, status: 204});
     })
 })
-
 
 module.exports = router;
