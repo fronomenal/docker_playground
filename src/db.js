@@ -4,7 +4,7 @@ const conn = mysql.createConnection({
     host : process.env.DB_HOST || 'localhost',
     user : 'root',
     password : (process.env.DB_PASS)? process.env.DB_PASS : '',
-    database : process.env.DB || 'shoppers' 
+    database : process.env.DB || 'monsters_db' 
 });
 
 conn.config.namedPlaceholders = true;

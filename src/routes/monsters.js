@@ -19,7 +19,7 @@ router.route("/")
     (err) => {
         if (err) return next(err);
 
-        response.status(201).json({msg: `succesfully created monster with id: ${id}`, status: 201});
+        response.json({msg: `succesfully created monster: ${name}`, status: 201});
     });
 });
 
@@ -73,7 +73,7 @@ router.route("/:id")
 
 });
 
-router.delete("\:id", (request, response, next) => {
+router.delete("/:id", (request, response, next) => {
     const {id} = request.params;
 
     db.query("DELETE FROM creatures WHERE id=?;", [id], (err) => {

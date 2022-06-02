@@ -31,7 +31,7 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Habitat'
+ *             $ref: '#/components/schemas/Monster'
  *     responses:
  *       200: 
  *         description: OK
@@ -68,6 +68,13 @@
  *   patch:
  *     summary: Update an existing monster's property in the database
  *     tags: [Monsters]
+ *     parameters:
+ *     - in: path
+ *       name: id
+ *       required: true
+ *       schema:
+ *         type: integer
+ *         minimum: 1
  *     requestBody:
  *       required: true
  *       content:
