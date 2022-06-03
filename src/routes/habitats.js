@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const res = require("express/lib/response");
 const db = require("../db");
 
 router.route("/")
@@ -21,6 +22,15 @@ router.route("/")
         if (err) return next(err);
 
         response.json(rez);
+    });
+});
+
+router.get("/:id", (request, response) => {
+    const {id} = req.params;
+
+    db.query("SELECT * FROM habitats WHERE id = ?", [id], (err, rez)=> {
+        if (err) next(err);
+        res.status(200).json(rez);
     });
 });
 
