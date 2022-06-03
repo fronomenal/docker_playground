@@ -14,7 +14,7 @@ router.route("/")
     , [name, climate, temperature], (err, res) =>{
         if (err) return next(err);
 
-        response.status(201).json({msg: `succesfully created habitat with id: ${id}`, status: 201});
+        response.status(201).json({msg: `succesfully created habitat: ${name}`, status: 201});
     });
 }).get((request, response, next) => {
     db.query("SELECT * FROM habitats ORDER BY id;", (err, rez) =>{
