@@ -7,14 +7,33 @@ const seedQuery = require("../db/monsters_database");
 adb = db.promise();
 
 router.get("/", (req, res, next)=>{
-    seedQuery.forEach( async (statement)=> {
+
+    let errs = [];
+
+    seedQuery.forEach( async (stmt, i, queries)=> {
         try {
-            await adb.query(statement);
+            await adb.query(stmt);
+            errs[i] = null;
         } catch (error) {
-            //ignoring errors. Problem with asynchronous execution of multiple statements in the same request body
+            errs[i] = error;
         }  
+
+        if (errs.length == queries.length){
+            let flag = errs.every( (e) => {
+                e == null;
+            });
+            
+            if (flag){
+                res.json({msg: "Seeded table", status: 200});
+            } else {
+                msg = errs.filter( (e)=> e != null).map( (e)=> e.message);
+                res.status(500).json(msg);
+            }
+        }
+
     });
-    res.json({msg: "Seeding table", status: 102});
+    
+
 });
 
 module.exports = router;
