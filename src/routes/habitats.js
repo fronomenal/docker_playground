@@ -30,7 +30,7 @@ router.get("/:id", (request, response) => {
     const {id} = request.params;
 
     db.query("SELECT * FROM habitats WHERE id = ?", [id], (err, rez)=> {
-        if (err) next(err);
+        if (err) return next(err);
         
         if (!rez[0]) {
             response.status(404).json({msg: "No habitat with provided id", status: 404});
