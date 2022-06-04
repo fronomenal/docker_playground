@@ -4,14 +4,15 @@ const db = require("../db");
 
 router.route("/")
 .post((request, response, next) => {
-    const { name, climate, temperature } = request.body;
+    const { id, name, climate, temperature } = request.body;
 
     if (!name && !climate && !temperature) {response.status(400).json({msg: "Provide the name, climate and temperature fields", status: 400}); return;}
     if (!name) {response.status(400).json({msg: "Provide name field", status: 400}); return;}
     if (!climate) {response.status(400).json({msg: "Provide climate field", status: 400}); return;}
     if (!temperature) {response.status(400).json({msg: "Provide temperature field", status: 400}); return;}
+    if (!id) {response.status(400).json({msg: "Provide id field", status: 400}); return;}
 
-    db.query("INSERT INTO habitats(name, climate, temperature) VALUES(?, ?, ?);"
+    db.query("INSERT INTO habitats(id, name, climate, temperature) VALUES(?, ?, ?, ?);"
     , [name, climate, temperature], (err, res) =>{
         if (err) return next(err);
 

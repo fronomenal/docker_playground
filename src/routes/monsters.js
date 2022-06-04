@@ -13,14 +13,15 @@ router.route("/")
     });
 
 }).post((request, response, next) => {
-    const { name, personality, home } = request.body;
+    const { id, name, personality, home } = request.body;
 
     if (!name && !personality && !home) {response.status(400).json({msg: "Provide the name, personality and home fields", status: 400}); return;}
     if (!name) {response.status(400).json({msg: "Provide name field", status: 400}); return;}
     if (!personality) {response.status(400).json({msg: "Provide personality field", status: 400}); return;}
     if (!home) {response.status(400).json({msg: "Provide home field", status: 400}); return;}
+    if (!id) {response.status(400).json({msg: "Provide id field", status: 400}); return;}
 
-    db.query("INSERT INTO creatures(name, personality) VALUES (?,?);",[name, personality],
+    db.query("INSERT INTO creatures(id, name, personality, home) VALUES (?,?,?,?);",[id, name, personality, home],
     (err) => {
         if (err) return next(err);
 
