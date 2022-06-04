@@ -13,7 +13,7 @@ router.route("/")
     if (!id) {response.status(400).json({msg: "Provide id field", status: 400}); return;}
 
     db.query("INSERT INTO habitats(id, name, climate, temperature) VALUES(?, ?, ?, ?);"
-    , [name, climate, temperature], (err, res) =>{
+    , [id, name, climate, temperature], (err, res) =>{
         if (err) return next(err);
 
         response.status(201).json({msg: `succesfully created habitat: ${name}`, status: 201});

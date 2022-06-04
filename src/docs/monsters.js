@@ -24,7 +24,7 @@
  *         description: Most likely internal backend database error
  *   post:
  *     summary: Store a monster into the database.
- *     description: Ensure a habitat already exists on the database before inserting a new monster.
+ *     description: Ensure a habitat already exists on the database before inserting a new monster. ID field is ignored
  *     tags: [Monsters]
  *     requestBody:
  *       required: true
