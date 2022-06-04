@@ -2,7 +2,7 @@
  * @swagger
  * tags:
  *   name: Habitats
- *   description: Routes that for managing habitats
+ *   description: Routes for managing habitats
  */
  
  /**

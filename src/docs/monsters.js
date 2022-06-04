@@ -2,7 +2,7 @@
  * @swagger
  * tags:
  *   name: Monsters
- *   description: Routes that for managing monsters
+ *   description: Routes for managing monsters
  */
 
  /**

@@ -2,7 +2,7 @@
  * @swagger
  * tags:
  *   name: Lives
- *   description: Routes for retrieving monsters with their lives
+ *   description: Routes for retrieving monsters with their homes
  */ 
  
  /**
