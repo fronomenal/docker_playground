@@ -12,7 +12,7 @@ router.get("/:id", (request, response, next) => {
         if (!rez[0]) {
             response.status(404).json({msg: "No monster with provided id", status: 404});
         } else {
-            response.status(200).json(rez);
+            response.status(200).json(rez[0]);
         }  
     });
 });
