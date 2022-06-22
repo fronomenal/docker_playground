@@ -2,7 +2,7 @@ services:
   api:
     build: 
       context: ./
-      target: dev
+      target: prod
     restart: always
     depends_on:
       - backend
