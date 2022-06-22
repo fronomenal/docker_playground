@@ -1,9 +1,12 @@
 services:
   api:
-    build: .
+    build: 
+      context: ./
+      target: dev
     restart: always
     depends_on:
       - backend
+    env_file: ./api.env
     ports:
       - "8080:9090"
     volumes:

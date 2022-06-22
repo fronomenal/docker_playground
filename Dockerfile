@@ -1,15 +1,27 @@
-FROM node:alpine
+FROM node:alpine as base
 
 WORKDIR /usr/dockerapp
 
 COPY package*.json ./
 
-RUN npm install
-
 COPY . .
 
-ENV PORT=9090 DB_HOST=backend DB_USER=root DB_PASS=toor DB=monsters
-
 EXPOSE 9090
+
+
+FROM base as prod
+
+RUN npm install --production
+
+ENV NODE_ENV=production
+
+CMD ["npm", "run", "app"]
+
+
+FROM base as dev
+
+RUN npm install
+
+ENV NODE_ENV=development
 
 CMD ["npm", "run", "dev"]
