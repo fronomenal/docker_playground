@@ -2,8 +2,6 @@ FROM node:alpine as base
 
 WORKDIR /usr/dockerapp
 
-COPY package*.json ./
-
 COPY . .
 
 EXPOSE 9090
