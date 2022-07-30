@@ -1,4 +1,4 @@
-FROM node:alpine as base
+FROM node:16-buster-slim as base
 
 WORKDIR /usr/dockerapp
 
