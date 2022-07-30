@@ -9,26 +9,29 @@ const conn = mysql.createConnection({
 
 conn.config.namedPlaceholders = true;
 
+// poll mysql server at specific intervals
 let poller = setInterval(poll, 3000);
-let flag = true;
-poll(poller);
-setTimeout(() => {
+
+// timeout to cancel poll retries
+retryTimeout = setTimeout(() => {
   clearInterval(poller)
   setTimeout(()=>{
-    if(flag) throw new Error("Database timeout after 16 seconds"); 
+    throw new Error("Database timeout after 16 seconds"); 
   }, 500);
 }, 15500);
 
+poll(); // starts polling now
 
-function poll(poller){
+// actual mysql server connection initiator
+function poll(){
   let errHandler = (errcon)=> {
     if (!errcon) {
       console.log("MySql Connected");
-      flag = false;
+      clearTimeout(retryTimeout);
       clearInterval(poller);
     }
   }
-  conn.connect(errHandler)
+  conn.connect(errHandler);
 }
 
 module.exports = conn;
