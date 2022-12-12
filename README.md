@@ -5,5 +5,5 @@
 
 ## Run `docker compose up` in project directory
 
-- **visit _localhost:8080/seedDB_ to populate the backend with some values**
-- **visit _localhost:8080/docs for information about routes**
+- **visit localhost:8080/seedDB_ to populate the backend with some values**
+- **visit localhost:8080/docs for information about routes**
